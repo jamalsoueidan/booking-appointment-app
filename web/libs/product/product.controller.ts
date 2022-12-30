@@ -2,8 +2,9 @@ import ProductModel from "@models/product.model";
 import ScheduleModel from "@models/schedule.model";
 import ProductService from "@services/product.service";
 import Shopify from "@shopify/shopify-api";
-import { Session } from "@shopify/shopify-api/dist/auth/session";
+import { Session } from "@shopify/shopify-api";
 import mongoose from "mongoose";
+import shopify from "../../shopify";
 
 export enum ControllerMethods {
   get = "get",
@@ -36,7 +37,7 @@ interface ClientQueryShopifyOrder {
 const getOrderFromShopify = async ({
   query: { session, id },
 }: GetOrderFromShopify) => {
-  const client = new Shopify.Clients.Graphql(session.shop, session.accessToken);
+  const client = new shopify.api.clients.Graphql({ ...session } as any);
   const data: ClientQueryShopifyOrder = await client.query({
     data: `query {
       order(id: "gid://shopify/Order/${id}") {

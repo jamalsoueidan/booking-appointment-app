@@ -7,9 +7,9 @@ export enum ControllerMethods {
 
 interface GetQuery extends Pick<Setting, "shop"> {}
 
-const get = async ({ query }: { query: GetQuery }): Promise<Setting> => {
+const get = ({ query }: { query: GetQuery }) => {
   const shop = query.shop;
-  return await SettingModel.findOne({ shop });
+  return SettingModel.findOne({ shop });
 };
 
 interface CreateQuery extends Pick<Setting, "shop"> {}

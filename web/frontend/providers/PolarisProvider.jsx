@@ -1,9 +1,8 @@
-import { useNavigate } from '@shopify/app-bridge-react';
-import { AppProvider } from '@shopify/polaris';
-import '@shopify/polaris/build/esm/styles.css';
 import { useCallback } from 'react';
-import shopifyTranslations from '@shopify/polaris/locales/en.json';
-import { useI18n } from '@shopify/react-i18n';
+import { AppProvider } from '@shopify/polaris';
+import { useNavigate } from '@shopify/app-bridge-react';
+import translations from '@shopify/polaris/locales/en.json';
+import '@shopify/polaris/build/esm/styles.css';
 
 function AppBridgeLink({ url, children, external, ...rest }) {
   const navigate = useNavigate();
@@ -15,14 +14,14 @@ function AppBridgeLink({ url, children, external, ...rest }) {
 
   if (external || IS_EXTERNAL_LINK_REGEX.test(url)) {
     return (
-      <a {...rest} href={url} target="_blank" rel="noopener noreferrer">
+      <a target="_blank" rel="noopener noreferrer" href={url} {...rest}>
         {children}
       </a>
     );
   }
 
   return (
-    <a {...rest} onClick={handleClick}>
+    <a onClick={handleClick} {...rest}>
       {children}
     </a>
   );
@@ -49,18 +48,8 @@ function AppBridgeLink({ url, children, external, ...rest }) {
  *
  */
 export function PolarisProvider({ children }) {
-  const [i18n] = useI18n({
-    id: 'Polaris',
-    fallback: shopifyTranslations,
-    async translations(locale) {
-      return locale === 'en'
-        ? shopifyTranslations
-        : import('@shopify/polaris/locales/da.json');
-    },
-  });
-
   return (
-    <AppProvider i18n={i18n.translations[0]} linkComponent={AppBridgeLink}>
+    <AppProvider i18n={translations} linkComponent={AppBridgeLink}>
       {children}
     </AppProvider>
   );

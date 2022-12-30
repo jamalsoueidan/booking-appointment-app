@@ -1,7 +1,7 @@
 import CollectionModel from "@models/collection.model";
 import ProductModel, { IProductModel } from "@models/product.model";
 import CollectionService from "@services/collection.service";
-import { Session } from "@shopify/shopify-api/dist/auth/session";
+import { Session } from "@shopify/shopify-api";
 import { getCollection } from "./collection.helpers";
 
 export enum ControllerMethods {

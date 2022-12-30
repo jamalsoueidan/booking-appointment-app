@@ -1,7 +1,7 @@
 // @ts-check
 import { Shopify } from "@shopify/shopify-api";
-import { Session } from "@shopify/shopify-api/dist/auth/session";
-
+import { Session } from "@shopify/shopify-api";
+import shopify from "../../shopify";
 interface Product {
   id: string;
   title: string;
@@ -42,7 +42,7 @@ export const getCollection = async (
   session: Partial<Session>,
   id: string
 ): Promise<Collection> => {
-  const client = new Shopify.Clients.Graphql(session.shop, session.accessToken);
+  const client = new shopify.api.clients.Graphql({ ...session } as any);
 
   const payload: GetCollectionQuery = await client.query({
     data: {

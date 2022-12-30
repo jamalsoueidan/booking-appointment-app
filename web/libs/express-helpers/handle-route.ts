@@ -1,5 +1,5 @@
-import Shopify from "@shopify/shopify-api";
 import { validationResult } from "express-validator";
+import shopify from "../../shopify";
 
 export const expressHandleRoute =
   (app, controller) =>
@@ -10,11 +10,8 @@ export const expressHandleRoute =
         throw errors;
       }
 
-      const session = await Shopify.Utils.loadCurrentSession(
-        req,
-        res,
-        app.get("use-online-tokens")
-      );
+      console.log(res.locals?.shopify);
+      const session = res?.locals?.shopify?.session;
 
       res.status(202).send({
         success: true,
@@ -34,11 +31,9 @@ export const expressHandleRoute =
         }),
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          success: false,
-          error: error instanceof Error ? `${error}` : error,
-        });
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? `${error}` : error,
+      });
     }
   };

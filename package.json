@@ -12,14 +12,14 @@
     "deploy": "shopify app deploy"
   },
   "dependencies": {
-    "@shopify/app": "^3.23.0",
-    "@shopify/cli": "^3.23.0",
+    "@shopify/app": "^3.30.1",
+    "@shopify/cli": "^3.30.1",
     "dotenv": "^16.0.3"
   },
   "author": "jamalsoueidan",
   "devDependencies": {
-    "@shopify/prettier-plugin-liquid": "^0.4.0",
+    "@shopify/prettier-plugin-liquid": "^1.0.2",
     "nodemon": "^2.0.20",
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.1"
   }
 }
